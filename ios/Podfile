@@ -1,3 +1,9 @@
+# COPIED PURPOSES FROM ORIGINAL
+# $RNFirebaseAsStaticFramework = true
+# $RNFirebaseAnalyticsWithoutAdIdSupport=true
+# require_relative '../node_modules/react-native/scripts/react_native_pods'
+# require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
 # Resolve react_native_pods.rb with node to allow for hoisting
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
@@ -22,11 +28,17 @@ flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : Flip
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+  # ***** FIREBASE CONF *****
+  use_frameworks! :linkage => :static 
   use_frameworks! :linkage => linkage.to_sym
 end
 
 target 'twoshowapp' do
   config = use_native_modules!
+  # ***** FIREBASE CONF *****
+  use_frameworks! :linkage => :static
+  $RNFirebaseAsStaticFramework = true
+  
 
   use_react_native!(
     :path => config[:reactNativePath],

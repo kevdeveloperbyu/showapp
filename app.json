@@ -1,4 +1,10 @@
 {
-  "name": "twoshowapp",
-  "displayName": "twoshowapp"
+  "android": {
+    "name": "twoshowapp",
+    "displayName": "2Show App"
+  },
+  "ios": {
+    "name": "twoshowapp",
+    "displayName": "2Show App"
+  }
 }
