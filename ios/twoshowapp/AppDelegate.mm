@@ -1,22 +1,25 @@
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
-// ##### APP CENTER CONF #####
+// ## APP CENTER CONF ##
 #import <AppCenterReactNative.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
-// ##### FIREBASE CONF #####
+// ## FIREBASE CONF ##
 #import <Firebase.h>
+// ## BOOTSPLASH CONF ##
+#import "RNBootSplash.h" 
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  // ##### APP CENTER CONF #####
+// ## APP CENTER CONF ##
   [AppCenterReactNative register];
   [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
   [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
-// ##### FIREBASE CONF #####
+// ## FIREBASE CONF ##
   [FIRApp configure];
 
   self.moduleName = @"twoshowapp";
@@ -39,6 +42,19 @@
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+}
+
+// ⬇️⬇️ BOOTSPLASH CONF ⬇️⬇️
+- (UIView *)createRootViewWithBridge:(RCTBridge *)bridge
+                          moduleName:(NSString *)moduleName
+                           initProps:(NSDictionary *)initProps {
+  UIView *rootView = [super createRootViewWithBridge:bridge
+                                          moduleName:moduleName
+                                           initProps:initProps];
+
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; // ⬅️ initialize the splash screen
+
+  return rootView;
 }
 
 @end

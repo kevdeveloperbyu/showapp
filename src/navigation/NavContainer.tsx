@@ -10,8 +10,12 @@ import { navigationRef } from './RootNavigation';
 import analytics from '@react-native-firebase/analytics';
 import { StatusBar, Text, View, useColorScheme } from 'react-native';
 import Loader from '@/components/svg/svg-notation';
+// ** BOOTSPLASH SCREEN **
+import BootSplash from "react-native-bootsplash";
+
 
 const NavContainer: React.FC = () => {
+
   const routeNameRef = React.useRef<any>(); //referencia del nombre de la ruta
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -21,6 +25,7 @@ const NavContainer: React.FC = () => {
       fallback={<Text>Cargando...</Text>}
       linking={linking}
       onReady={() => {
+        BootSplash.hide({ fade: true })
         // if (navigationRef.isReady()) {
         //   routeNameRef.current = navigationRef.getCurrentRoute();
         // }
