@@ -9,7 +9,6 @@ import { navigationRef } from './RootNavigation';
 // SCREEN TRACKING
 import analytics from '@react-native-firebase/analytics';
 import { StatusBar, Text, View, useColorScheme } from 'react-native';
-import Loader from '@/components/svg/svg-notation';
 // ** BOOTSPLASH SCREEN **
 import BootSplash from "react-native-bootsplash";
 

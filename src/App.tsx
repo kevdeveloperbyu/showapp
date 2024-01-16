@@ -7,7 +7,6 @@ import {
 
 import NavContainer from './navigation/NavContainer';
 import RootProvider from './providers/root-provider';
-import Loader from './components/svg/svg-notation';
 
 
 const App = () => {
@@ -16,7 +15,6 @@ const App = () => {
   //   NotificationListener();
   // }, []);
 
-  // return <Loader/>
   return (
     <RootProvider>
         <NavContainer />
