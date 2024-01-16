@@ -7,16 +7,40 @@ import {
   Image,
   TextInput,
   View,
+  Button,
+  Alert,
 } from 'react-native';
 import { moderateScale, verticalScale } from '../../../utils/scaleMetrics';
-import { Formik, validateYupSchema } from 'formik';
 import Analytics from 'appcenter-analytics';
 import { authServices } from '../../../services/auth.services';
 import LoginLinear from '@/screens/linearGradients/login-linear';
 import Loader from '@/components/svg/svg-notation';
 import ScreenWrapper from '@/components/screen-wrapper';
+import { ZodError } from 'zod';
+import { useForm, Controller, SubmitHandler, FormProvider, SubmitErrorHandler } from "react-hook-form"
+import { getReadableValidationErrorMessage } from './getReadableErrors';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { LoginSchema, TLoginSchema } from '@/types/schemas/auth-schema';
 
 const LoginScreen = ({ navigation }) => {
+
+  const form = useForm<TLoginSchema>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+    // mode: 'onBlur',
+  })
+  const { errors } = form.formState
+
+  // const onSubmit: SubmitHandler<TLoginSchema> = (data) => {
+  //   console.log(JSON.stringify(data));
+  // };
+  const onSubmit: SubmitHandler<TLoginSchema> = (data: TLoginSchema) => {
+    console.log("everything good", JSON.stringify(data));
+  };
+
   return (
     <LoginLinear>
       <SafeAreaView
@@ -27,40 +51,55 @@ const LoginScreen = ({ navigation }) => {
           style={styles.img}
         />
         <Text style={styles.loginText}>Login</Text>
-        <Formik
-          initialValues={{ email: '', password: '' }}
-          onSubmit={values => {
+        <FormProvider {...form}>
 
-            console.log("values", values);
-            const res = authServices.loginWithFirebase(values.email, values.password);
-            console.log("response", res)
-          }}>
-          {({ handleChange, handleBlur, handleSubmit, values }) => (
-            <View>
+          <Controller
+            name="email"
+            control={form.control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                placeholder="Write your email"
-                placeholderTextColor={'black'}
+                placeholder="Email"
                 style={styles.input}
-                value={values.email}
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
               />
+            )}
+          />
+          {errors.email && <Text>{errors.email?.message}</Text>}
+
+          <Controller
+            name="password"
+            control={form.control}
+            rules={{
+              required: true,
+            }}
+            render={({ field: { onChange, onBlur, value } }) => (
               <TextInput
-                placeholder="Write your password"
-                placeholderTextColor={'black'}
+                placeholder="Password"
                 style={styles.input}
-                value={values.password}
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                textContentType="password"
-                secureTextEntry={true}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                value={value}
               />
-              <TouchableOpacity style={styles.btnLogin} onPress={handleSubmit}>
-                <Text style={styles.btnText}>Login</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </Formik>
+            )}
+          />
+          {errors.password && <Text>{errors.password?.message}</Text>}
+
+          {/* <Button title="Submit" onPress={form.handleSubmit(onSubmit)} /> */}
+          <TouchableOpacity style={styles.btnLogin}
+            // onPress={onSubmit}
+            onPress={form.handleSubmit(onSubmit)}
+          >
+            <Text style={styles.btnText}>Login</Text>
+          </TouchableOpacity>
+
+        </FormProvider>
+
+
 
         <TouchableOpacity
           style={{ marginBottom: 10 }}
@@ -85,9 +124,10 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    alignSelf: 'center',
+    // alignSelf: 'center',
     alignContent: 'center',
     justifyContent: 'center',
+    gap: 10,
     height: '100%',
     width: '100%',
     // backgroundColor: '#6C141B',

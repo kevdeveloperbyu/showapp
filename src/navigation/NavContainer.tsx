@@ -64,7 +64,10 @@ const NavContainer: React.FC = () => {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         // backgroundColor={backgroundStyle.backgroundColor}
       /> */}
-
+      <StatusBar
+        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+        // backgroundColor={Colors}
+      />
       <AppNavigator />
     </NavigationContainer>
 
