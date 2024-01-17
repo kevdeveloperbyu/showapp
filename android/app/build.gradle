@@ -121,5 +121,3 @@ dependencies {
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
 // ** VECTOR ICONS CONF **
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
-// ** VECTOR IMAGE CONF **
-apply from: "../../node_modules/react-native-vector-image/strip_svgs.gradle"

@@ -40,7 +40,7 @@ npm run ios
 - [`Bootsplash`](https://github.com/zoontek/react-native-bootsplash) - Splash Screen.
 - [`Reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/your-first-animation) - Animations for React Native.
 - [`QR Code`](https://www.npmjs.com/package/react-native-qrcode-svg) - QR Code SVG.
-- [`React Native Vector Image`](https://github.com/oblador/react-native-vector-image) - iOS/Android native vector assets generated from SVG.
+
 
 ## Bootsplash
 
