@@ -41,6 +41,7 @@ const TabStack = () => {
         header: ({ navigation, route, options }) => {
           const title = getHeaderTitle(options, route.name);
           // console.log("nav", navigation.canGoBack())
+          // navigation.goBack()
           return (
             <AppBar navigation={navigation}   />
           );

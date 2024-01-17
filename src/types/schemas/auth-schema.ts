@@ -15,3 +15,8 @@ export const SignUpSchema = z.object({
 });
 export type TSignUpSchema = z.infer<typeof SignUpSchema>;
 
+export const RecoverPwdSchema = z.object({
+  email: z.string().email('Correo electronico invalido!').min(5, 'La contrasena es muy corta'),
+});
+export type TRecoverPwdSchema = z.infer<typeof RecoverPwdSchema>;
+

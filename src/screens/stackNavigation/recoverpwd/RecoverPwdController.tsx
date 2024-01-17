@@ -1,12 +1,12 @@
 import React from 'react'
-import { View } from 'react-native'
 import RecoverPwdScreen from './RecoverPwdScreen'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const RecoverPwdController = ({navigation}) => {
   return (
-    <View>
+    <SafeAreaView>
         <RecoverPwdScreen navigation={navigation} />
-    </View>
+    </SafeAreaView>
   )
 }
 

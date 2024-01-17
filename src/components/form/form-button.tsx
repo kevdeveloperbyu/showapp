@@ -5,12 +5,13 @@ type Props = TouchableOpacityProps & {
     title: string,
     opacity?: number
     style?: StyleProp<ViewStyle>
+    textStyle?: Record<string, string>
 }
 
-const FormButton = ({ title, opacity = 0.6, style, ...rest }: Props) => {
+const FormButton = ({ title, opacity = 0.6, style, textStyle, ...rest }: Props) => {
     return (
         <TouchableOpacity activeOpacity={opacity} style={[styles.btnLogin, style]} {...rest}>
-            <Text style={styles.btnText}>{title}</Text>
+            <Text style={[styles.btnText, textStyle]}>{title}</Text>
         </TouchableOpacity>
     )
 }
@@ -22,10 +23,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: '#2E364C',
         padding: 10,
-        marginTop: 20,
+
         width: moderateScale(250),
         alignItems: 'center',
-        marginBottom: verticalScale(20),
         borderWidth: 0,
         borderRadius: 25,
         borderColor: "transparent",

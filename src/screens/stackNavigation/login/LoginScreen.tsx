@@ -28,6 +28,7 @@ import GoogleSvg from '@/components/svg/google-svg';
 import { AppleLogo, GoogleLogo } from '@/assets/icons';
 
 const LoginScreen = ({ navigation }) => {
+  console.log("login can", navigation.canGoBack())
 
   const form = useForm<TLoginSchema>({
     resolver: zodResolver(LoginSchema),
@@ -69,6 +70,7 @@ const LoginScreen = ({ navigation }) => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <FormInput
                   placeholder="Correo electronico"
+                  placeholderTextColor="#A9A9A9"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -88,6 +90,7 @@ const LoginScreen = ({ navigation }) => {
                 <FormInput
                   password
                   placeholder="Contrasena"
+                  placeholderTextColor="#A9A9A9"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -107,7 +110,7 @@ const LoginScreen = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('Recover Password')}>
           <Text
             style={[styles.textForget, {
-              position: "absolute", bottom: 0,
+              position: "absolute", bottom: -10,
               alignSelf: "center",
             }]}
           >Olvidaste tu Contrasena?</Text>
@@ -207,7 +210,8 @@ const styles = StyleSheet.create({
     gap: 20
   },
   buttonLogin: {
-    backgroundColor: "#9467C1"
+    backgroundColor: "#9467C1",
+    marginVertical: 10
   },
   googleButton: {
     backgroundColor: '#69AFF0',

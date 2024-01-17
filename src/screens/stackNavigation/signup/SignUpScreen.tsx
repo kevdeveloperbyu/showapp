@@ -23,8 +23,10 @@ import AntDesign from "react-native-vector-icons/AntDesign"
 import Button from '@/components/form/button';
 import GoogleSvg from '@/components/svg/google-svg';
 import { AppleLogo, GoogleLogo } from '@/assets/icons';
+import BackButton from '@/components/button/back-button';
 
 const SignUpScreen = ({ navigation }) => {
+  console.log("signup can", navigation.canGoBack())
 
   const form = useForm<TSignUpSchema>({
     resolver: zodResolver(SignUpSchema),
@@ -47,6 +49,11 @@ const SignUpScreen = ({ navigation }) => {
 
   return (
     <LoginLinear style={styles.container}>
+
+      {navigation.canGoBack() &&
+        <BackButton onPress={() => navigation.goBack()} />
+      }
+
       <View style={styles.content}>
 
         <Image
@@ -68,6 +75,7 @@ const SignUpScreen = ({ navigation }) => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <FormInput
                   placeholder="Nombres completos"
+                  placeholderTextColor="#A9A9A9"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -85,6 +93,7 @@ const SignUpScreen = ({ navigation }) => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <FormInput
                   placeholder="Correo electronico"
+                  placeholderTextColor="#A9A9A9"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -103,6 +112,7 @@ const SignUpScreen = ({ navigation }) => {
                 <FormInput
                   password
                   placeholder="Contrasena"
+                  placeholderTextColor="#A9A9A9"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -120,6 +130,7 @@ const SignUpScreen = ({ navigation }) => {
               render={({ field: { onChange, onBlur, value } }) => (
                 <FormInput
                   placeholder="Edad"
+                  placeholderTextColor="#A9A9A9"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -139,7 +150,7 @@ const SignUpScreen = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text
             style={[styles.textForget, {
-              position: "absolute", bottom: 0,
+              position: "absolute", bottom: -10,
               alignSelf: "center",
             }]}
           >Ya tengo una cuenta</Text>
@@ -155,7 +166,7 @@ const SignUpScreen = ({ navigation }) => {
 
         <View style={styles.toogleButtons}>
 
-          <Button title='Continuar con Google' icon={<GoogleLogo width={SIZE_ICON} height={SIZE_ICON} />} onPress={() => console.log("google")} style={styles.googleButton} textStyle={styles.darkText}/>
+          <Button title='Continuar con Google' icon={<GoogleLogo width={SIZE_ICON} height={SIZE_ICON} />} onPress={() => console.log("google")} style={styles.googleButton} textStyle={styles.darkText} />
 
           <Button title='Continuar con Apple' icon={<AppleLogo width={SIZE_ICON} height={SIZE_ICON} />} onPress={() => console.log("apple")} style={styles.appleButton} textStyle={styles.darkText} />
         </View>
@@ -231,7 +242,8 @@ const styles = StyleSheet.create({
     gap: 10
   },
   buttonSignUp: {
-    backgroundColor: "#9467C1"
+    backgroundColor: "#9467C1",
+    marginVertical: 10
   },
   googleButton: {
     // backgroundColor: '#69AFF0',

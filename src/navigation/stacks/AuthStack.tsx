@@ -18,34 +18,26 @@ const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+      headerShown: false
+    }}
+    >
       <Stack.Screen
         name="Login"
         component={LoginController}
-        options={{
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name="Sign Up"
         component={SignUpController}
-        options={{
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name="Recover Password"
         component={RecoverPwdController}
-        options={{
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name="Reset Password"
         component={ResetPwdController}
-        options={{
-          headerShown: false,
-        }}
       />
     </Stack.Navigator>
   );
