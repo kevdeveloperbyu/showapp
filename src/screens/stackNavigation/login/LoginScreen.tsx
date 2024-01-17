@@ -5,10 +5,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  TextInput,
   View,
-  Button,
   Alert,
+  Keyboard,
 } from 'react-native';
 import { moderateScale, verticalScale } from '../../../utils/scaleMetrics';
 import Analytics from 'appcenter-analytics';
@@ -24,6 +23,10 @@ import SvgWave from '@/components/svg/wave-login';
 import FormButton from '@/components/form/form-button';
 import FormInput from '@/components/form/form-input';
 import AntDesign from "react-native-vector-icons/AntDesign"
+import Button from '@/components/form/button';
+import GoogleSvg from '@/components/svg/google-svg';
+import { GoogleLogo } from '@/assets/icons';
+import VectorImage from 'react-native-vector-image';
 
 const LoginScreen = ({ navigation }) => {
 
@@ -96,7 +99,11 @@ const LoginScreen = ({ navigation }) => {
               )}
             />
 
-            <FormButton title='Ingresar' onPress={form.handleSubmit(onSubmit)} />
+            <FormButton title='Ingresar' onPress={() => {
+              form.handleSubmit(onSubmit);
+              Keyboard.dismiss();
+              // form.reset()
+            }} />
 
           </FormProvider>
         </View>
@@ -106,7 +113,10 @@ const LoginScreen = ({ navigation }) => {
       <SvgWave />
 
       <View style={styles.footer}>
-        <FormButton title='Recuperar contrasena'/>
+        <GoogleSvg />
+        {/* <VectorImage source={require('src/assets/icons/google-logo.svg')} />; */}
+        <FormButton title='Recuperar contrasena' />
+        <Button title='Press this!' />
         <TouchableOpacity
           style={{ marginBottom: 10 }}
           onPress={() => navigation.navigate('Recover Password')}>
