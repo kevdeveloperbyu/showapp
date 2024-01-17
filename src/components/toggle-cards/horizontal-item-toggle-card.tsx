@@ -2,6 +2,7 @@ import { inDevelopment } from '@/lib/inDevelopment';
 import React from 'react';
 import { Image,  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ItemToggleCardProps } from './toggle-card';
+import { sizes } from '@/constants/theme';
 
 
 
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     },
     surface: {
         aspectRatio: 1,
-        width: '100%',
+        width: sizes.width,
         height: MAX_WIDTH,
     },
     image: {
@@ -59,7 +60,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         paddingTop: 6,
-        width: "100%",
+        width: sizes.width,
         flexDirection: "column",
 
     },

@@ -2,6 +2,7 @@ import { inDevelopment } from '@/lib/inDevelopment';
 import React from 'react';
 import { Image, ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ItemToggleCardProps } from './toggle-card';
+import { sizes } from '@/constants/theme';
 
 type Props = {
   src: ImageSourcePropType;
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
   },
   surface: {
     aspectRatio: 1,
-    width: '100%',
+    width: sizes.width,
     height: MAX_WIDTH,
     flexDirection: "column"
 
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     paddingTop: 6,
-    width: "100%",
+    width: sizes.width,
     flexDirection: "column",
 
   },

@@ -14,6 +14,7 @@ import UserMenu from './menu/user-menu'
 import GreetingMessage from './greeting-message'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/rtk'
+import { sizes } from '@/constants/theme'
 
 export enum MODE_APPBAR {
     DEFAULT = "DEFAULT",
@@ -235,7 +236,7 @@ const styles = StyleSheet.create({
     appBarColor: {
         backgroundColor: MD2Colors.transparent,
         position: "absolute",
-        width: "100%",
+        width: sizes.width,
         // backgroundColor: 'rgba(0, 0, 0, 0.5)',
         zIndex: 100
     },

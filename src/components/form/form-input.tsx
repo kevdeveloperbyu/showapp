@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import { moderateScale, verticalScale } from '@/utils/scaleMetrics'
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { colors, sizes } from '@/constants/theme';
 
 
 type Props = TextInputProps & {
@@ -78,18 +79,20 @@ const styles = StyleSheet.create({
         height: verticalScale(40),
         width: moderateScale(250),
         paddingLeft: 20,
-        backgroundColor: 'white',
+        backgroundColor: colors.white,
         borderRadius: 25,
         fontSize: 17
     },
     withIconLeftInput: {
         marginLeft: 6,
-        width: "100%"
+        width: sizes.width,
+        color: colors.black
     },
     withIconRightInput: {
-        width: "100%",
+        width: sizes.width,
         fontSize: 17,
         height: verticalScale(40),
+        color: colors.black
     },
     buttonRight: {
         position: "absolute",
@@ -100,12 +103,13 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingLeft: 20,
         width: moderateScale(250),
-        backgroundColor: 'white',
+        backgroundColor: colors.white,
         borderRadius: 25,
-        fontSize: 17
+        fontSize: 17,
+        color: colors.black
     },
     error: {
-        color: "red",
+        color: colors.red,
         fontSize: 15,
     }
 })

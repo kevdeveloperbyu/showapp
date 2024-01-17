@@ -9,8 +9,9 @@ import {
     List,
 } from 'react-native-paper';
 
-import { useExampleTheme } from './index';
+// import { useExampleTheme } from './index';
 import ScreenWrapper from '../screen-wrapper';
+import { sizes } from '@/constants/theme';
 // import ScreenWrapper from './screen-wrapper';
 
 const SurfaceExample = () => {
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     horizontalSurfacesContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '100%',
+        width: sizes.width,
         marginBottom: 20,
         borderColor: MD3Colors.tertiary50,
         padding: 10,
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     verticalSurfacesContainer: {
         height: 400,
         justifyContent: 'space-between',
-        width: '100%',
+        width: sizes.width,
         marginBottom: 100,
         borderColor: MD3Colors.tertiary50,
         padding: 10,

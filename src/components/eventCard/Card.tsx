@@ -4,6 +4,7 @@ import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 import {event} from '../types/types';
 import {moderateScale, verticalScale} from '../../utils/scaleMetrics';
 import analytics from '@react-native-firebase/analytics';
+import { sizes } from '@/constants/theme';
 
 const Card = ({cost, type, description, artist, city, date, img, id, nav,}) => {
   return (
@@ -80,12 +81,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   block: {
-    width: '100%',
+    width: sizes.width,
     padding: 0,
     paddingBottom: 0,
   },
   img: {
-    width: '100%',
+    width: sizes.width,
     height: verticalScale(250),
   },
   description: {
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#2E364C',
-    width: '100%',
+    width: sizes.width,
     marginTop: 0,
     paddingTop: 10,
     paddingBottom: 10,

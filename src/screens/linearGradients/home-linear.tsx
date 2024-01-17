@@ -1,3 +1,4 @@
+import { sizes } from '@/constants/theme';
 import { StyleSheet, Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -33,6 +34,6 @@ export default HomeLinear
 
 const styles = StyleSheet.create({
     safeAreaView: {
-        height: '100%'
+        height: sizes.height
     }
 });

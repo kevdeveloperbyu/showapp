@@ -26,6 +26,7 @@ import AntDesign from "react-native-vector-icons/AntDesign"
 import Button from '@/components/form/button';
 import GoogleSvg from '@/components/svg/google-svg';
 import { AppleLogo, GoogleLogo } from '@/assets/icons';
+import { colors, sizes } from '@/constants/theme';
 
 const LoginScreen = ({ navigation }) => {
   console.log("login can", navigation.canGoBack())
@@ -156,8 +157,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    height: '100%',
-    width: '100%',
+    height: sizes.height,
+    width: sizes.width,
     flex: 1
     // backgroundColor: '#6C141B',
   },
@@ -184,7 +185,9 @@ const styles = StyleSheet.create({
     height: 90,
   },
   footer: {
-    backgroundColor: "white",
+    backgroundColor: colors.white,
+    borderTopWidth: 1,
+    borderColor: colors.white,
     width: "100%",
     flex: 0.4,
     alignItems: "center",
