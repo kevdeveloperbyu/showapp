@@ -1,16 +1,15 @@
-import { StyleSheet, Text, TouchableOpacityProps, View } from 'react-native'
-import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { StyleProp, StyleSheet, Text, TouchableOpacityProps, TouchableOpacity, ViewStyle } from 'react-native'
 import { moderateScale, verticalScale } from '@/utils/scaleMetrics'
 
 type Props = TouchableOpacityProps & {
     title: string,
     opacity?: number
+    style?: StyleProp<ViewStyle>
 }
 
-const FormButton = ({ title, opacity = 0.6, ...rest }: Props) => {
+const FormButton = ({ title, opacity = 0.6, style, ...rest }: Props) => {
     return (
-        <TouchableOpacity activeOpacity={opacity} style={styles.btnLogin} {...rest}>
+        <TouchableOpacity activeOpacity={opacity} style={[styles.btnLogin, style]} {...rest}>
             <Text style={styles.btnText}>{title}</Text>
         </TouchableOpacity>
     )

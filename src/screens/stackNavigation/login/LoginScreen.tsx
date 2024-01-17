@@ -25,8 +25,7 @@ import FormInput from '@/components/form/form-input';
 import AntDesign from "react-native-vector-icons/AntDesign"
 import Button from '@/components/form/button';
 import GoogleSvg from '@/components/svg/google-svg';
-import { GoogleLogo } from '@/assets/icons';
-import VectorImage from 'react-native-vector-image';
+import { AppleLogo, GoogleLogo } from '@/assets/icons';
 
 const LoginScreen = ({ navigation }) => {
 
@@ -45,6 +44,8 @@ const LoginScreen = ({ navigation }) => {
   // };
   const onSubmit: SubmitHandler<TLoginSchema> = (data: TLoginSchema) => {
     console.log("everything good", JSON.stringify(data));
+    Keyboard.dismiss();
+    form.reset()
   };
 
   return (
@@ -99,36 +100,48 @@ const LoginScreen = ({ navigation }) => {
               )}
             />
 
-            <FormButton title='Ingresar' onPress={() => {
-              form.handleSubmit(onSubmit);
-              Keyboard.dismiss();
-              // form.reset()
-            }} />
+            <FormButton title='Ingresar' onPress={form.handleSubmit(onSubmit)}
+              style={styles.buttonLogin}
+            />
 
           </FormProvider>
         </View>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Recover Password')}>
+          <Text
+            style={[styles.textForget, {
+              position: "absolute", bottom: 0,
+              alignSelf: "center",
+            }]}
+          >Olvidaste tu Contrasena?</Text>
+        </TouchableOpacity>
+
       </View>
 
-      {/* Wave  */}
       <SvgWave />
 
       <View style={styles.footer}>
-        <GoogleSvg />
-        {/* <VectorImage source={require('src/assets/icons/google-logo.svg')} />; */}
-        <FormButton title='Recuperar contrasena' />
-        <Button title='Press this!' />
-        <TouchableOpacity
-          style={{ marginBottom: 10 }}
-          onPress={() => navigation.navigate('Recover Password')}>
-          <Text style={styles.btnText}>I forget my password</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Sign Up');
-            Analytics.trackEvent('open_signUp');
-          }}>
-          <Text style={styles.btnText}>Sign up</Text>
-        </TouchableOpacity>
+
+        <Text style={styles.textBlack}>o Conectate con</Text>
+
+        <View style={styles.toogleButtons}>
+
+          <Button title='Google' icon={<GoogleLogo width={SIZE_ICON} height={SIZE_ICON} />} onPress={() => console.log("google")} style={styles.googleButton} />
+
+          <Button title='Apple' icon={<AppleLogo width={SIZE_ICON} height={SIZE_ICON} />} onPress={() => console.log("apple")} style={styles.appleButton} />
+        </View>
+
+        <View style={{ gap: 10, flexDirection: "row" }}>
+          <Text style={styles.textBlack}>No tienes una cuenta?</Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('Sign Up');
+              Analytics.trackEvent('open_signUp');
+            }}>
+            <Text style={styles.textLink}>Registrarme</Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
 
     </LoginLinear >
@@ -137,6 +150,7 @@ const LoginScreen = ({ navigation }) => {
 
 export default LoginScreen;
 
+const SIZE_ICON = 24
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -159,7 +173,6 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     gap: 30,
-    // backgroundColor: '#6C141B',
   },
   header: {
     fontWeight: 'bold',
@@ -173,12 +186,40 @@ const styles = StyleSheet.create({
   footer: {
     backgroundColor: "white",
     width: "100%",
-    height: "25%",
+    flex: 0.4,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "flex-start"
   },
-  btnText: {
-    color: 'black',
-    fontSize: 18,
+  textForget: {
+    color: "white",
+    fontSize: 15,
+    fontWeight: "bold"
+  },
+  textBlack: {
+    color: "black",
+    fontSize: 15,
+  },
+  textLink: {
+    color: '#305FD9',
+    fontSize: 15,
+    fontWeight: "bold",
+    // textDecorationLine: 'underline'
+  },
+  toogleButtons: {
+    flexDirection: "row",
+    gap: 20
+  },
+  buttonLogin: {
+    backgroundColor: "#9467C1"
+  },
+  googleButton: {
+    backgroundColor: '#69AFF0',
+    paddingRight: 40,
+    width: "35%"
+  },
+  appleButton: {
+    backgroundColor: "#305FD9",
+    paddingRight: 40,
+    width: "35%"
   },
 });

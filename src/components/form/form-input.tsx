@@ -1,13 +1,20 @@
-import { Pressable, StyleSheet, TextInputProps, View } from 'react-native'
-import React from 'react'
-import { TextInput } from 'react-native'
+import React from 'react';
+import {
+    Pressable,
+    StyleSheet,
+    TextInputProps,
+    View,
+    TextInput,
+    Text,
+    ViewStyle,
+    StyleProp
+} from 'react-native'
 import { moderateScale, verticalScale } from '@/utils/scaleMetrics'
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { boolean } from 'zod'
-import { Text } from 'react-native';
 
 type Props = TextInputProps & {
+    style?: StyleProp<ViewStyle>
     left?: React.ReactNode
     right?: React.ReactNode
     rightOnPress?: () => void
@@ -15,7 +22,8 @@ type Props = TextInputProps & {
     password?: boolean
 }
 
-const FormInput = ({ left, right, rightOnPress = () => { }, error, password, ...rest }: Props) => {
+const FormInput = ({
+    style, left, right, rightOnPress = () => { }, error, password, ...rest }: Props) => {
     const [hidePassword, setHidePassword] = React.useState<boolean>()
     const hasLeft = left ? true : null
     const hasRight = right ? true : null
@@ -30,7 +38,7 @@ const FormInput = ({ left, right, rightOnPress = () => { }, error, password, ...
                 {hasLeft && left}
 
                 <TextInput
-                    style={hasLeft ? styles.withIconLeftInput : hasRight ? styles.withIconRightInput : styles.input}
+                    style={[hasLeft ? styles.withIconLeftInput : hasRight ? styles.withIconRightInput : styles.input, style]}
                     {...rest}
                     secureTextEntry={hidePassword}
                 />
