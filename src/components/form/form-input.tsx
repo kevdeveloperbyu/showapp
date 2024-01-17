@@ -27,7 +27,7 @@ const FormInput = ({
     const [hidePassword, setHidePassword] = React.useState<boolean>()
     const hasLeft = left ? true : null
     const hasRight = right ? true : null
-    const hasLeftRight = hasLeft || hasRight ? true : false
+    const hasLeftRight = hasLeft || hasRight || password ? true : false
 
     return (
         <View style={styles.container}>
@@ -38,7 +38,7 @@ const FormInput = ({
                 {hasLeft && left}
 
                 <TextInput
-                    style={[hasLeft ? styles.withIconLeftInput : hasRight ? styles.withIconRightInput : styles.input, style]}
+                    style={[hasLeft ? styles.withIconLeftInput : hasRight || password ? styles.withIconRightInput : styles.input, style]}
                     {...rest}
                     secureTextEntry={hidePassword}
                 />
@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         height: verticalScale(40),
-        paddingLeft: 20,
         width: moderateScale(250),
+        paddingLeft: 20,
         backgroundColor: 'white',
         borderRadius: 25,
         fontSize: 17

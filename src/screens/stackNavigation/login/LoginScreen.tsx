@@ -39,13 +39,11 @@ const LoginScreen = ({ navigation }) => {
   })
   const { errors } = form.formState
 
-  // const onSubmit: SubmitHandler<TLoginSchema> = (data) => {
-  //   console.log(JSON.stringify(data));
-  // };
   const onSubmit: SubmitHandler<TLoginSchema> = (data: TLoginSchema) => {
     console.log("everything good", JSON.stringify(data));
     Keyboard.dismiss();
-    form.reset()
+    form.reset();
+    // authServices.loginWithFirebase(data.email, data.password);
   };
 
   return (
@@ -70,7 +68,7 @@ const LoginScreen = ({ navigation }) => {
               }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <FormInput
-                  placeholder="Correo Electronico"
+                  placeholder="Correo electronico"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
@@ -88,7 +86,6 @@ const LoginScreen = ({ navigation }) => {
               render={({ field: { onChange, onBlur, value } }) => (
 
                 <FormInput
-                  right={<AntDesign name={"eye"} size={24} />}
                   password
                   placeholder="Contrasena"
                   onBlur={onBlur}
@@ -172,7 +169,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    gap: 30,
+    gap: 20,
   },
   header: {
     fontWeight: 'bold',
@@ -214,12 +211,18 @@ const styles = StyleSheet.create({
   },
   googleButton: {
     backgroundColor: '#69AFF0',
+    paddingLeft: 20,
     paddingRight: 40,
-    width: "35%"
+    width: "35%",
+    marginTop: 20,
+    marginBottom: verticalScale(20)
   },
   appleButton: {
     backgroundColor: "#305FD9",
+    paddingLeft: 20,
     paddingRight: 40,
-    width: "35%"
+    width: "35%",
+    marginTop: 20,
+    marginBottom: verticalScale(20)
   },
 });

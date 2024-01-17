@@ -12,13 +12,16 @@ type Props = TouchableOpacityProps & {
     opacity?: number,
     icon?: React.ReactNode
     style?: StyleProp<ViewStyle>
+    textStyle?: Record<string, string>
 }
 
-const Button = ({ title, opacity = 0.6, icon, style: styleProp, ...rest }: Props) => {
+const Button = ({ title, opacity = 0.6, icon, style, textStyle, ...rest }: Props) => {
     return (
-        <TouchableOpacity activeOpacity={opacity} style={[styles.btnLogin, styleProp]} {...rest}>
+        <TouchableOpacity activeOpacity={opacity} style={[styles.btnLogin, style]} {...rest}>
             {icon ? icon : null}
-            <Text style={styles.btnText}>{title}</Text>
+            {/* <Text style={styles.btnText}>{title}</Text> */}
+            <Text style={[styles.btnText, textStyle]}>{title}</Text>
+
         </TouchableOpacity>
     )
 }
@@ -29,18 +32,10 @@ const styles = StyleSheet.create({
     btnLogin: {
         gap: 10,
         flexDirection: "row",
-        // flex:0.1,
         alignSelf: 'center',
         backgroundColor: '#69AFF0',
         padding: 10,
-        marginTop: 20,
-        // width: moderateScale(250),
-        paddingRight: 30,
-        alignItems: 'center',
-        marginBottom: verticalScale(20),
-        borderWidth: 0,
         borderRadius: 25,
-        borderColor: "transparent",
         color: "white"
     },
     btnText: {

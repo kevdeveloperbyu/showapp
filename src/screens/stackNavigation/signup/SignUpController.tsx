@@ -1,12 +1,13 @@
 import React from 'react'
 import { View } from 'react-native'
 import SignUpScreen from './SignUpScreen'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const SignUpController = ({navigation}) => {
   return (
-    <View>
+    <SafeAreaView>
         <SignUpScreen navigation={navigation} />
-    </View>
+    </SafeAreaView>
   )
 }
 

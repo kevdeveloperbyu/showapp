@@ -5,126 +5,258 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  TextInput,
   View,
+  Alert,
+  Keyboard,
 } from 'react-native';
-import {moderateScale, verticalScale} from '../../../utils/scaleMetrics';
-import {Formik, validateYupSchema} from 'formik';
-import {authServices} from '../../../services';
+import { moderateScale, verticalScale } from '../../../utils/scaleMetrics';
+import Analytics from 'appcenter-analytics';
+import { authServices } from '../../../services/auth.services';
+import LoginLinear from '@/screens/linearGradients/login-linear';
+import { useForm, Controller, SubmitHandler, FormProvider, SubmitErrorHandler } from "react-hook-form"
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SignUpSchema, TSignUpSchema } from '@/types/schemas/auth-schema';
+import SvgWave from '@/components/svg/wave-login';
+import FormButton from '@/components/form/form-button';
+import FormInput from '@/components/form/form-input';
+import AntDesign from "react-native-vector-icons/AntDesign"
+import Button from '@/components/form/button';
+import GoogleSvg from '@/components/svg/google-svg';
+import { AppleLogo, GoogleLogo } from '@/assets/icons';
 
-const SignUpScreen = ({navigation}) => {
+const SignUpScreen = ({ navigation }) => {
+
+  const form = useForm<TSignUpSchema>({
+    resolver: zodResolver(SignUpSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      password: "",
+      age: ""
+    },
+    mode: 'onBlur',
+  })
+  const { errors } = form.formState
+
+  const onSubmit: SubmitHandler<TSignUpSchema> = (data: TSignUpSchema) => {
+    console.log("everything good", JSON.stringify(data));
+    Keyboard.dismiss();
+    form.reset()
+    // authServices.createUserWithFirebase(data.email, data.password);
+  };
+
   return (
-    <SafeAreaView style={styles.loginBlock}>
-      <Image
-        source={require('../../../assets/images/whitelogo.png')}
-        style={styles.img}
-      />
-      <Text style={styles.loginText}>Sign Up</Text>
-      <Formik
-        initialValues={{email: '', password: '', age: '', name: ''}}
-        onSubmit={values => {
-          console.log(values);
-          authServices.createUserWithFirebase(values.email, values.password);
-        }}>
-        {({handleChange, handleBlur, handleSubmit, values}) => (
-          <View>
-            <TextInput
-              placeholder="Write your full name"
-              placeholderTextColor={'black'}
-              style={styles.input}
-              value={values.name}
-              onChangeText={handleChange('name')}
-              onBlur={handleBlur('name')}
-            />
-            <TextInput
-              placeholder="Write your email"
-              placeholderTextColor={'black'}
-              style={styles.input}
-              value={values.email}
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-            />
-            <TextInput
-              placeholder="Write your password"
-              placeholderTextColor={'black'}
-              style={styles.input}
-              value={values.password}
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              textContentType="password"
-              secureTextEntry={true}
-            />
-            <TextInput
-              placeholder="Write your age"
-              placeholderTextColor={'black'}
-              style={styles.input}
-              value={values.age}
-              onChangeText={handleChange('age')}
-              onBlur={handleBlur('age')}
-              keyboardType="number-pad"
-            />
-            <TouchableOpacity style={styles.btnLogin} onPress={handleSubmit}>
-              <Text style={styles.btnText}>Sign Up</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </Formik>
+    <LoginLinear style={styles.container}>
+      <View style={styles.content}>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.btnText}>Login</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+        <Image
+          source={require('src/assets/images/whitelogo.png')}
+          style={styles.img}
+        />
+
+        <Text style={styles.header}>Registro</Text>
+
+        <View style={styles.form}>
+          <FormProvider {...form}>
+
+            <Controller
+              name="fullName"
+              control={form.control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <FormInput
+                  placeholder="Nombres completos"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  error={errors.fullName?.message}
+                />
+              )}
+            />
+
+            <Controller
+              name="email"
+              control={form.control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <FormInput
+                  placeholder="Correo electronico"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  error={errors.email?.message}
+                />
+              )}
+            />
+
+            <Controller
+              name="password"
+              control={form.control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <FormInput
+                  password
+                  placeholder="Contrasena"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  error={errors.password?.message}
+                />
+              )}
+            />
+
+            <Controller
+              name="age"
+              control={form.control}
+              rules={{
+                required: true,
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <FormInput
+                  placeholder="Edad"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  error={errors.password?.message}
+                  keyboardType='number-pad'
+                />
+              )}
+            />
+
+            <FormButton title='Registrarse' onPress={form.handleSubmit(onSubmit)}
+              style={styles.buttonSignUp}
+            />
+
+          </FormProvider>
+        </View>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text
+            style={[styles.textForget, {
+              position: "absolute", bottom: 0,
+              alignSelf: "center",
+            }]}
+          >Ya tengo una cuenta</Text>
+        </TouchableOpacity>
+
+      </View>
+
+      <SvgWave />
+
+      <View style={styles.footer}>
+
+        <Text style={styles.textBlack}>O</Text>
+
+        <View style={styles.toogleButtons}>
+
+          <Button title='Continuar con Google' icon={<GoogleLogo width={SIZE_ICON} height={SIZE_ICON} />} onPress={() => console.log("google")} style={styles.googleButton} textStyle={styles.darkText}/>
+
+          <Button title='Continuar con Apple' icon={<AppleLogo width={SIZE_ICON} height={SIZE_ICON} />} onPress={() => console.log("apple")} style={styles.appleButton} textStyle={styles.darkText} />
+        </View>
+
+      </View>
+
+    </LoginLinear >
   );
 };
 
 export default SignUpScreen;
 
+const SIZE_ICON = 24
 const styles = StyleSheet.create({
-  loginBlock: {
+  container: {
     alignItems: 'center',
-    alignSelf: 'center',
     alignContent: 'center',
     justifyContent: 'center',
     height: '100%',
     width: '100%',
-    backgroundColor: '#6C141B',
+    flex: 1
+    // backgroundColor: '#6C141B',
   },
-  btnLogin: {
-    alignSelf: 'center',
-    backgroundColor: '#2E364C',
-    padding: 10,
-    width: moderateScale(140),
+  content: {
+    gap: 20,
+    flex: 1,
     alignItems: 'center',
-    borderRadius: 10,
-    borderColor: 'white',
-    borderWidth: 1,
-    marginBottom: verticalScale(20),
+    alignContent: 'center',
+    justifyContent: 'flex-end',
   },
-  btnSignUp: {},
+  form: {
+    alignItems: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
+    gap: 20,
+  },
+  header: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 35,
+  },
   img: {
     width: 120,
     height: 90,
-    marginTop: 0,
-    marginBottom: 50,
   },
-  loginText: {
-    fontWeight: 'bold',
-    color: 'white',
-    fontSize: 30,
-    marginBottom: 50,
+  footer: {
+    backgroundColor: "white",
+    width: "100%",
+    flex: 0.2,
+    alignItems: "center",
+    justifyContent: "flex-start"
   },
-  signUpText: {},
-  input: {
-    height: verticalScale(35),
-    margin: 12,
+  textForget: {
+    color: "white",
+    fontSize: 15,
+    fontWeight: "bold"
+  },
+  textBlack: {
+    color: "black",
+    position: "absolute",
+    top: -30,
+    alignSelf: "center",
+    fontSize: 15,
+  },
+  textLink: {
+    color: '#305FD9',
+    fontSize: 15,
+    fontWeight: "bold",
+    // textDecorationLine: 'underline'
+  },
+  toogleButtons: {
+    flexDirection: "column",
+    gap: 10
+  },
+  buttonSignUp: {
+    backgroundColor: "#9467C1"
+  },
+  googleButton: {
+    // backgroundColor: '#69AFF0',
+    backgroundColor: "transparent",
+    borderColor: "black",
     borderWidth: 1,
-    padding: 10,
+    color: "black",
+    paddingLeft: 20,
+    alignSelf: "center",
+    height: verticalScale(40),
     width: moderateScale(250),
-    backgroundColor: 'white',
-    borderRadius: 10,
   },
-  btnText: {
-    color: 'white',
-    fontSize: 18,
+  appleButton: {
+    // backgroundColor: "#305FD9",
+    backgroundColor: "transparent",
+    borderColor: "black",
+    borderWidth: 1,
+    color: "black",
+    paddingLeft: 20,
+    paddingRight: 40,
+    alignSelf: "center",
+    height: verticalScale(40),
+    width: moderateScale(250),
   },
+  darkText: {
+    color: "#000"
+  }
 });
