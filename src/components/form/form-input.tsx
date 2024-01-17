@@ -1,42 +1,70 @@
-import { Pressable, StyleSheet, Text, TextInputProps, View } from 'react-native'
+import { Pressable, StyleSheet, TextInputProps, View } from 'react-native'
 import React from 'react'
 import { TextInput } from 'react-native'
 import { moderateScale, verticalScale } from '@/utils/scaleMetrics'
-import { Image } from 'react-native'
-import AntDesign from "react-native-vector-icons/AntDesign"
+import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import { boolean } from 'zod'
+import { Text } from 'react-native';
 
 type Props = TextInputProps & {
     left?: React.ReactNode
     right?: React.ReactNode
     rightOnPress?: () => void
+    error?: string
+    password?: boolean
 }
 
-const FormInput = ({ left, right, rightOnPress = () => { }, ...rest }: Props) => {
+const FormInput = ({ left, right, rightOnPress = () => { }, error, password, ...rest }: Props) => {
+    const [hidePassword, setHidePassword] = React.useState<boolean>()
     const hasLeft = left ? true : null
     const hasRight = right ? true : null
     const hasLeftRight = hasLeft || hasRight ? true : false
+
     return (
-        <View style={hasLeftRight ? styles.view : null}>
-            {hasLeft && left}
+        <View style={styles.container}>
+            <View
+                style={hasLeftRight ? styles.inputContainer : null}
+            // style={ styles.inputContainer }
+            >
+                {hasLeft && left}
 
-            <TextInput
-                style={hasLeft ? styles.withIconLeftInput : hasRight ? styles.normalInput : styles.input}
-                {...rest}
-            />
+                <TextInput
+                    style={hasLeft ? styles.withIconLeftInput : hasRight ? styles.withIconRightInput : styles.input}
+                    {...rest}
+                    secureTextEntry={hidePassword}
+                />
 
-            {hasRight &&
-                <Pressable style={styles.right} onPress={rightOnPress}>
-                    {hasRight && right}
-                </Pressable>
-            }
+                {hasRight && !password &&
+                    <Pressable style={styles.buttonRight} onPress={rightOnPress}>
+                        {hasRight && right}
+                    </Pressable>
+                }
+                {/* When the input is password */}
+                {password &&
+                    <Pressable style={styles.buttonRight} onPress={rightOnPress}>
+                        <MIcon
+                            onPress={() => setHidePassword(!hidePassword)}
+                            name={hidePassword ? 'eye-outline' : 'eye-off-outline'}
+                            size={24}
+                        // style={{ color: COLORS.darkBlue, fontSize: 22 }}
+                        />
+                    </Pressable>}
+
+            </View>
+            {error && <Text style={styles.error}>{error}</Text>}
         </View>
+
     )
 }
 
 export default FormInput
 
 const styles = StyleSheet.create({
-    view: {
+    container: {
+        gap: 5
+    },
+    inputContainer: {
         flexDirection: "row",
         alignItems: "center",
         height: verticalScale(40),
@@ -44,27 +72,32 @@ const styles = StyleSheet.create({
         width: moderateScale(250),
         backgroundColor: 'white',
         borderRadius: 25,
-    },
-    right: {
-        position: "absolute",
-        right: 20
+        fontSize: 17
     },
     withIconLeftInput: {
         marginLeft: 6,
         width: "100%"
     },
-    normalInput: {
-        width: "100%"
+    withIconRightInput: {
+        width: "100%",
+        fontSize: 17,
+        height: verticalScale(40),
+    },
+    buttonRight: {
+        position: "absolute",
+        right: 20
     },
     input: {
         height: verticalScale(40),
-        margin: 6,
-        // borderWidth: 1,
         padding: 10,
         paddingLeft: 20,
         width: moderateScale(250),
         backgroundColor: 'white',
         borderRadius: 25,
+        fontSize: 17
     },
-
+    error: {
+        color: "red",
+        fontSize: 15,
+    }
 })

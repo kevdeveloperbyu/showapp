@@ -45,16 +45,17 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <LoginLinear>
-      <SafeAreaView
-        style={styles.container}
-      >
+    <LoginLinear style={styles.container}>
+      <View style={styles.content}>
+
         <Image
-          source={require('../../../assets/images/whitelogo.png')}
+          source={require('src/assets/images/whitelogo.png')}
           style={styles.img}
         />
-        <Text style={styles.loginText}>Ingreso</Text>
-        <View style={styles.formContainer}>
+
+        <Text style={styles.header}>Ingreso</Text>
+
+        <View style={styles.form}>
           <FormProvider {...form}>
 
             <Controller
@@ -65,14 +66,14 @@ const LoginScreen = ({ navigation }) => {
               }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <FormInput
-                  placeholder="Email"
+                  placeholder="Correo Electronico"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
+                  error={errors.email?.message}
                 />
               )}
             />
-            {errors.email && <Text>{errors.email?.message}</Text>}
 
             <Controller
               name="password"
@@ -81,33 +82,31 @@ const LoginScreen = ({ navigation }) => {
                 required: true,
               }}
               render={({ field: { onChange, onBlur, value } }) => (
-                // <TextInput
-                //   placeholder="Password"
-                //   style={styles.input}
-                //   onBlur={onBlur}
-                //   onChangeText={onChange}
-                //   value={value}
-                // />
-                <FormInput
-                  right={<AntDesign name={"eye"} size={24} style={{
-                    position: "relative",
 
-                  }} />}
-                  placeholder="Password"
+                <FormInput
+                  right={<AntDesign name={"eye"} size={24} />}
+                  password
+                  placeholder="Contrasena"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
+                  error={errors.password?.message}
                 />
+
               )}
             />
-            {errors.password && <Text>{errors.password?.message}</Text>}
 
             <FormButton title='Ingresar' onPress={form.handleSubmit(onSubmit)} />
 
           </FormProvider>
         </View>
+      </View>
 
-        <SvgWave />
+      {/* Wave  */}
+      <SvgWave />
+
+      <View style={styles.footer}>
+        <FormButton title='Recuperar contrasena'/>
         <TouchableOpacity
           style={{ marginBottom: 10 }}
           onPress={() => navigation.navigate('Recover Password')}>
@@ -120,7 +119,8 @@ const LoginScreen = ({ navigation }) => {
           }}>
           <Text style={styles.btnText}>Sign up</Text>
         </TouchableOpacity>
-      </SafeAreaView>
+      </View>
+
     </LoginLinear >
   );
 };
@@ -130,37 +130,45 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    // alignSelf: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    gap: 20,
     height: '100%',
     width: '100%',
+    flex: 1
     // backgroundColor: '#6C141B',
   },
-  formContainer: {
+  content: {
+    gap: 20,
+    flex: 1,
     alignItems: 'center',
-    // alignSelf: 'center',
+    alignContent: 'center',
+    justifyContent: 'flex-end',
+  },
+  form: {
+    alignItems: 'center',
     alignContent: 'center',
     justifyContent: 'center',
-    gap: 10,
+    gap: 30,
     // backgroundColor: '#6C141B',
   },
-
-  btnSignUp: {},
+  header: {
+    fontWeight: 'bold',
+    color: 'white',
+    fontSize: 35,
+  },
   img: {
     width: 120,
     height: 90,
-    // marginBottom: 50,
   },
-  loginText: {
-    fontWeight: 'bold',
-    color: 'white',
-    fontSize: 30,
-    // marginBottom: 50,
+  footer: {
+    backgroundColor: "white",
+    width: "100%",
+    height: "25%",
+    alignItems: "center",
+    justifyContent: "center"
   },
   btnText: {
-    color: 'white',
+    color: 'black',
     fontSize: 18,
   },
 });

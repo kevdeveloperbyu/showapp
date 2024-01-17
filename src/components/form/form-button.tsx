@@ -8,9 +8,9 @@ type Props = TouchableOpacityProps & {
     opacity?: number
 }
 
-const FormButton = ({ title, onPress, opacity = 0.6, ...rest }: Props) => {
+const FormButton = ({ title, opacity = 0.6, ...rest }: Props) => {
     return (
-        <TouchableOpacity activeOpacity={opacity} style={styles.btnLogin}  {...rest}>
+        <TouchableOpacity activeOpacity={opacity} style={styles.btnLogin} {...rest}>
             <Text style={styles.btnText}>{title}</Text>
         </TouchableOpacity>
     )

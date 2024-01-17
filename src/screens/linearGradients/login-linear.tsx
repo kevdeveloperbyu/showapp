@@ -10,9 +10,9 @@ type ScreenTemplateProps = {
 
 const LoginLinear = ({ children, style }: ScreenTemplateProps) => {
     return (
-        <SafeAreaView style={[style ]}>
+        <SafeAreaView style={styles.safeAreaView}>
             <LinearGradient
-                style={styles.safeAreaView}
+                style={style ? style : null}
                 // start={{ x: 0, y: 0 }}
                 // end={{ x: 1, y: 0 }}
                 // colors={['#6C141B', 'black']}
@@ -35,6 +35,7 @@ export default LoginLinear
 
 const styles = StyleSheet.create({
     safeAreaView: {
-        // height: '100%'
+        height: '100%',
+        width: '100%',
     }
 });
