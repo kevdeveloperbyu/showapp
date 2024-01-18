@@ -1,7 +1,8 @@
 import {
   StyleSheet,
+  Text,
 } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { moderateScale } from '../../../utils/scaleMetrics';
 import HomeLinear from '../../linearGradients/home-linear';
 
@@ -9,11 +10,19 @@ import { HomeTabScreenProps } from '../../../types/navigator-types';
 import ScreenWrapper from '@/components/screen-wrapper';
 import { events } from '@/assets/mocks/events'
 import ToggleCard, { ORIENTATION } from '@/components/toggle-cards/toggle-card';
+import Button from '@/components/form/button';
+import { useCounter, useCounterStore } from '@/hooks';
+import { load } from '@/lib/storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function HomeScreen({ eventsList, navigation }: HomeTabScreenProps) {
+function HomeScreen({ eventsList, navigation }:
+  // HomeTabScreenProps |
+  any) {
   // const {
   //   colors: { brandSecondary },
   // } = useAppTheme();
+
+
 
   return (
     <HomeLinear>
@@ -21,7 +30,9 @@ function HomeScreen({ eventsList, navigation }: HomeTabScreenProps) {
         // withScrollView={false}
         style={{ marginTop: 80 }}
       >
+
         <ToggleCard title='Nuevos eventos' subtitle='Ver mas' items={events} />
+
       </ScreenWrapper>
     </HomeLinear >
 

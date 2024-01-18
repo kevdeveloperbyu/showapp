@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     card: {
         margin: 12,
         overflow: 'hidden',
-        position: "relative"
     },
     surface: {
         aspectRatio: 1,
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         paddingTop: 6,
-        width: sizes.width,
+        // width: ,
         flexDirection: "column",
 
     },

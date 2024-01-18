@@ -1,4 +1,4 @@
-import { ImageSourcePropType, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { List } from 'react-native-paper';
 import { ScrollView } from 'react-native';

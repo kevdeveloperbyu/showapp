@@ -42,10 +42,9 @@ const LoginScreen = ({ navigation }) => {
   const { errors } = form.formState
 
   const onSubmit: SubmitHandler<TLoginSchema> = (data: TLoginSchema) => {
-    console.log("everything good", JSON.stringify(data));
+    authServices.loginWithFirebase(data.email, data.password);
     Keyboard.dismiss();
     form.reset();
-    // authServices.loginWithFirebase(data.email, data.password);
   };
 
   return (

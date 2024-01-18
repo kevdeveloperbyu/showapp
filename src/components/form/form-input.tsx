@@ -56,6 +56,7 @@ const FormInput = ({
                             onPress={() => setHidePassword(!hidePassword)}
                             name={hidePassword ? 'eye-outline' : 'eye-off-outline'}
                             size={24}
+                            style={{ color: colors.gray }}
                         // style={{ color: COLORS.darkBlue, fontSize: 22 }}
                         />
                     </Pressable>}

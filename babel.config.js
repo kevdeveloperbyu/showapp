@@ -23,6 +23,7 @@ module.exports = {
           '@/types': './src/types',
           '@/utils': './src/utils',
           '@/constants': './src/constants',
+          '@/hooks': './src/hooks',
           '*': ['src/*'],
         },
       },

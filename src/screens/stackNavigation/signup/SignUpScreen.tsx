@@ -24,6 +24,7 @@ import Button from '@/components/form/button';
 import GoogleSvg from '@/components/svg/google-svg';
 import { AppleLogo, GoogleLogo } from '@/assets/icons';
 import BackButton from '@/components/button/back-button';
+import { colors } from '@/constants/theme';
 
 const SignUpScreen = ({ navigation }) => {
   console.log("signup can", navigation.canGoBack())
@@ -44,7 +45,7 @@ const SignUpScreen = ({ navigation }) => {
     console.log("everything good", JSON.stringify(data));
     Keyboard.dismiss();
     form.reset()
-    // authServices.createUserWithFirebase(data.email, data.password);
+    authServices.createUserWithFirebase(data.email, data.password);
   };
 
   return (
@@ -147,12 +148,15 @@ const SignUpScreen = ({ navigation }) => {
           </FormProvider>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}
+          style={[{
+            position: "absolute", bottom: -10,
+            alignSelf: "center",
+          }]}
+
+        >
           <Text
-            style={[styles.textForget, {
-              position: "absolute", bottom: -10,
-              alignSelf: "center",
-            }]}
+            style={[styles.textForget]}
           >Ya tengo una cuenta</Text>
         </TouchableOpacity>
 
@@ -220,7 +224,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start"
   },
   textForget: {
-    color: "white",
+    color: colors.white,
     fontSize: 15,
     fontWeight: "bold"
   },

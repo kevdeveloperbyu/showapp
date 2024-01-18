@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { StateStorage } from "zustand/middleware"
 
 /**
  * Loads a string from storage.
@@ -66,7 +67,7 @@ export async function save(key: string, value: unknown): Promise<boolean> {
 export async function remove(key: string): Promise<void> {
   try {
     await AsyncStorage.removeItem(key)
-  } catch {}
+  } catch { }
 }
 
 /**
@@ -75,5 +76,26 @@ export async function remove(key: string): Promise<void> {
 export async function clear(): Promise<void> {
   try {
     await AsyncStorage.clear()
-  } catch {}
+  } catch { }
+}
+
+/**
+ * Custom storage object to zustand
+ * @property getItem - A function to retrieve an item from storage.
+ * @returns string
+ * @property setItem - A function to save an item to storage.
+ * @returns void
+ * @property removeItem - A function to remove an item from storage.
+ * @returns void
+ */
+export const customStorage: StateStorage = {
+  getItem: async (name: string): Promise<string | null> => {
+    return (await loadString(name)) || null
+  },
+  setItem: async (name: string, value: string): Promise<void> => {
+    await saveString(name, value)
+  },
+  removeItem: async (name: string): Promise<void> => {
+    await remove(name)
+  },
 }
