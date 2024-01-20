@@ -62,3 +62,8 @@ export const spacing = {
   l: 24,
   xl: 40,
 };
+
+export const sizeIcon = {
+  m: 24,
+  l: 30
+}

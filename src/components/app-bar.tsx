@@ -4,7 +4,6 @@ import { Appbar, IconButton, MD2Colors, MD3Colors } from 'react-native-paper'
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs'
 import { ParamListBase } from '@react-navigation/native'
 import { DrawerNavigationProp } from '@react-navigation/drawer'
-import { BlurView } from '@react-native-community/blur';
 
 import Avatar from './avatar'
 import SearchBar from './search-bar'

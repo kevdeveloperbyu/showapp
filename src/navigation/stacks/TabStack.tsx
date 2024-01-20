@@ -20,8 +20,8 @@ import { getHeaderTitle } from '@react-navigation/elements';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import VectorImage from 'react-native-vector-image';
 import AppBar, { MODE_APPBAR } from '@/components/app-bar';
+import { colors, sizeIcon } from '@/constants/theme';
 
 enum STACK_NAMES {
 
@@ -30,23 +30,19 @@ enum STACK_NAMES {
 const Tab = createBottomTabNavigator();
 
 const TabStack = () => {
-  const SIZE_ICON = 24
-  const WHITE = "white"
+  const SIZE_ICON = sizeIcon.m
+  const WHITE = colors.white
 
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: styles.tabBarStyle,
         headerShown: true,
-        header: ({ navigation, route, options }) => {
-          const title = getHeaderTitle(options, route.name);
-          // console.log("nav", navigation.canGoBack())
-          // navigation.goBack()
-          return (
-            <AppBar navigation={navigation}   />
-          );
-        },
-
+        // header: ({ navigation, route, options }) => {
+        //   const title = getHeaderTitle(options, route.name);
+        //   return <></>;
+        // },
+        // tabbarl
       }}
       initialRouteName="Home"
     >
@@ -63,6 +59,10 @@ const TabStack = () => {
             focused ?
               (<Entypo name="home" color={WHITE} size={SIZE_ICON} />)
               : (<AntDesign name="home" color={WHITE} size={SIZE_ICON} />),
+          headerShown: true,
+          header: ({ navigation }) => {
+            return <AppBar navigation={navigation} mode={MODE_APPBAR.DEFAULT} />
+          }
         })}
       />
 
@@ -80,6 +80,10 @@ const TabStack = () => {
             ) : (
               <IonIcons name="book-outline" color={WHITE} size={SIZE_ICON} />
             ),
+          headerShown: true,
+          header: ({ navigation }) => {
+            return <AppBar navigation={navigation} mode={MODE_APPBAR.DEFAULT} />
+          }
         })}
       />
 
@@ -97,6 +101,10 @@ const TabStack = () => {
             ) : (
               <IonIcons name="search-outline" color={WHITE} size={SIZE_ICON} />
             ),
+          headerShown: true,
+          header: ({ navigation }) => {
+            return <AppBar navigation={navigation} mode={MODE_APPBAR.DEFAULT} />
+          }
         })}
       />
 
@@ -114,6 +122,10 @@ const TabStack = () => {
             ) : (
               <IonIcons name="ticket-outline" color={WHITE} size={SIZE_ICON} />
             ),
+          headerShown: true,
+          header: ({ navigation }) => {
+            return <AppBar navigation={navigation} mode={MODE_APPBAR.DEFAULT} />
+          }
         })}
       />
 

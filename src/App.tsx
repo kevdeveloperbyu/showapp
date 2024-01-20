@@ -7,6 +7,11 @@ import {
 
 import NavContainer from './navigation/NavContainer';
 import RootProvider from './providers/root-provider';
+import SharedElementExample from './navigation/SharedElementExample';
+import BootSplash from "react-native-bootsplash";
+import SharedElementNavigator from './shared-element/src/navigator/SharedElementNavigator';
+import { NavigationContainer } from '@react-navigation/native';
+
 
 
 const App = () => {
@@ -14,10 +19,17 @@ const App = () => {
   //   requestUserPermission();
   //   NotificationListener();
   // }, []);
-
+  React.useEffect(() => {
+    BootSplash.hide({ fade: true })
+  }, [])
   return (
     <RootProvider>
-        <NavContainer />
+      {/* <NavContainer /> */}
+      {/* <SharedElementExample/> */}
+      <NavigationContainer>
+
+        <SharedElementNavigator />
+      </NavigationContainer>
     </RootProvider>
 
   )

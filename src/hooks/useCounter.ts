@@ -1,6 +1,5 @@
 import { StoreApi, create, useStore } from 'zustand'
-import { persist, createJSONStorage, StateStorage } from 'zustand/middleware'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { persist, createJSONStorage } from 'zustand/middleware'
 import { customStorage } from '@/lib/storage';
 
 type StoreCounter = {

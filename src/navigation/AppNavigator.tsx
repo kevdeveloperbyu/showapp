@@ -63,10 +63,10 @@ const AppNavigator: any = () => {
     );
   }
 
-  dispatch(setAuthInitialState({
-    email: user.email ?? "",
-    firebaseID: user.uid ?? "1"
-  }))
+  // dispatch(setAuthInitialState({
+  //   email: user.email ?? "",
+  //   firebaseID: user.uid ?? "1"
+  // }))
 
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer, NavigationContainerRefWithCurrent, InitialState } from '@react-navigation/native';
 import AppNavigator from './AppNavigator';
 import linking from './deeplinks/linkingConfig';
-import { Provider } from 'react-redux';
+
 
 import { navigationRef } from './RootNavigation';
 
@@ -65,7 +65,7 @@ const NavContainer: React.FC = () => {
       /> */}
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        // backgroundColor={Colors}
+      // backgroundColor={Colors}
       />
       <AppNavigator />
     </NavigationContainer>

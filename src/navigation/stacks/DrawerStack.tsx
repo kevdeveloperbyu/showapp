@@ -103,16 +103,16 @@ const DrawerStack = ({ navigation }: Props) => {
         }}
       />
       {/* gives me an error with reanimated */}
-      {/* <Drawer.Screen
+      <Drawer.Screen
         name="My Detail Event"
         component={DetailPhysicalEventController}
         options={{
           drawerIcon: ({color, size, focused}) => {
             return <Entypo name="user" color={color} size={size} />;
           },
-          drawerItemStyle: {height: 0},
+          // drawerItemStyle: {height: 0},
         }}
-      /> */}
+      />
       <Drawer.Screen
         name="Buy event with"
         component={BuyEventWithController}
@@ -120,7 +120,7 @@ const DrawerStack = ({ navigation }: Props) => {
           drawerIcon: ({ color, size, focused }) => {
             return <Entypo name="user" color={color} size={size} />;
           },
-          drawerItemStyle: { height: 0 },
+          // drawerItemStyle: { height: 0 },
         }}
       />
     </Drawer.Navigator>

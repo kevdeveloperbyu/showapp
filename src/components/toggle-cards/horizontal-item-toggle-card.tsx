@@ -1,17 +1,15 @@
 import { inDevelopment } from '@/lib/inDevelopment';
 import React from 'react';
-import { Image,  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ItemToggleCardProps } from './toggle-card';
 import { sizes } from '@/constants/theme';
 
-
-
 const HorizontalItemToggleCard = ({ src, title, description, httpSrc }: ItemToggleCardProps) => {
-
     return (
         <TouchableOpacity activeOpacity={0.6} style={styles.card} onPress={(e) => {
             e.stopPropagation();
             inDevelopment()
+            
         }
         }>
             <>
